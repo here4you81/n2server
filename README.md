@@ -1,2 +1,2 @@
 # n2server
-NestJS + Next.js
+NestJS + Next.js 테스트

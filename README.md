@@ -42,7 +42,7 @@ front라는 이름의 Next.js 프로젝트를 생성한다.
 npx create-next-app front --typescript
 ```
 --typescript 옵션을 추가하면 front프로젝트에서 typescript를 사용할 수 있도록 자동 설정된다.
-
+  
 front 디렉토리로 이동해서 개발모드로 서버를 실행한다.
 ```bash
 npm run dev

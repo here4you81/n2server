@@ -61,7 +61,8 @@ npm run start:dev
 ```
 로컬호스트 3000으로 접속해서 웹페이지가 정상 출력되는지 확인한다.
 
-## back-end에 테스트 리소스 추가
+## Front-end와 Back-end 연동
+### back-end에 테스트 리소스 추가
 back-end에 새로운 리소스 apple을 추가해보자. 
 back-end 서버가 개발모드로 동작하는 상태에서 back 디렉토리에서 다음과 같이 실행한다.
 ```bash

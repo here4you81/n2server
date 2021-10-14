@@ -36,6 +36,7 @@ sudo npm i create-next-app -g
 sudo npm i -g @nestjs/cli
 ```
 
+
 ## front-end
 
 ## back-end

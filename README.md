@@ -87,6 +87,29 @@ SOURCE_PATH = '/api/:path*'
 DESTINATION_URL = 'http://localhost:3001/:path*'
 ```
 
+next.config.js 파일을 다음과 같이 수정한다.
+```
+module.exports = {
+  reactStrictMode: true,
+  async rewrites() {
+    if (process.env.NODE_ENV !== 'production') {
+      return [
+        {
+          source: process.env.SOURCE_PATH,
+          destination: process.env.DESTINATION_URL,
+        },
+      ];
+    }
+  },
+}
+```
+
+상기 두 파일의 내용은 front-end의 /api 패스로 수신되는 요청을 back-end로 전달하도록 설정한 것이다.
+새롭게 추가된 .env파일의 내용이 반영되도록 front 서버를 재시작 한 후 front-end를 통해 back-end를 호출해 보자.
+http://localhost:11035/api/apple
+
+
+
 
 # 타이틀1(#)
 ## 타이틀2(##)

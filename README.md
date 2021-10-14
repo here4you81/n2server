@@ -37,9 +37,9 @@ sudo npm i -g @nestjs/cli
 ```
 **
 
-## front-end
+### front-end
 
-## back-end
+### back-end
 
 # 타이틀1(#)
 ## 타이틀2(##)

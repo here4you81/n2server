@@ -105,8 +105,11 @@ module.exports = {
 ```
 
 상기 두 파일의 내용은 front-end의 /api 패스로 수신되는 요청을 back-end로 전달하도록 설정한 것이다.
-새롭게 추가된 .env파일의 내용이 반영되도록 front 서버를 재시작 한 후 front-end를 통해 back-end를 호출해 보자.
-http://localhost:11035/api/apple
+새롭게 추가된 .env파일의 내용이 반영되도록 front 서버를 재시작 한 후 front-end를 통해 back-end를 호출해 보자. 
+http://localhost:3000/api/apple 로 접속하여 "This action returns all apple" 메시지가 정상 출력되는지 확인한다.
+
+
+
 
 
 

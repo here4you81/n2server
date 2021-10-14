@@ -69,7 +69,7 @@ nest g res apple
 ```
 
 back/src/apple 디렉토리가 생성되었는지 확인한 후 웹브라우저를 통해 http://localhost:3000/apple 로 접속을 시도한다.
-
+"This action returns all apple" 메시지가 출력되면 정상적으로 리소스가 추가되고 CRUD 엔드포인트도 정상 동작하는 것이다.
 
 
 # 타이틀1(#)

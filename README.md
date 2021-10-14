@@ -27,6 +27,15 @@ sudo n 14.17.6
 ```bash
 sudo npm i npx -g
 ```
+- create-next-app: Next.js 프로젝트를 생성하고 기본 패키지를 설치해주는 프로그램
+```bash
+sudo npm i create-next-app -g
+```
+- @nestjs/cli: NestJS 프레임워크
+```bash
+sudo npm i -g @nestjs/cli
+```
+
 ## front-end
 
 ## back-end

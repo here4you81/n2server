@@ -62,6 +62,7 @@ npm run start:dev
 로컬호스트 3000으로 접속해서 웹페이지가 정상 출력되는지 확인한다.
 
 ## Front-end와 Back-end 연동
+
 ### back-end에 테스트 리소스 추가
 back-end에 새로운 리소스 apple을 추가해보자. 
 back-end 서버가 개발모드로 동작하는 상태에서 back 디렉토리에서 다음과 같이 실행한다.
@@ -71,6 +72,20 @@ nest g res apple
 
 back/src/apple 디렉토리가 생성되었는지 확인한 후 웹브라우저를 통해 http://localhost:3000/apple 로 접속을 시도한다.
 "This action returns all apple" 메시지가 출력되면 정상적으로 리소스가 추가되고 CRUD 엔드포인트도 정상 동작하는 것이다.
+
+### back-end 포트 변경
+현재 설정에서는 front와 back 서버 모두 동일한 3000번 포트를 사용하므로 단일 서버에서 두 서버를 동작시키기 위해서는 포트번호를 변경해야 한다. 
+back/src/main.ts 파일을 열어 기존 3000번 포트를 30001번으로 변경한다.
+새로운 포트로 리소스(http://localhost:3001/apple)에 접속해 보자.
+
+### front-end에 프록시 설정
+현재까지의 설정에서는 front에 접근하기 위해서는 3000번 포트, back에 접근하기 위해서는 30001번 포트를 이용해야 한다. back-end를 private network으로 옮기고 front를 거처서만 back에 접근할 수 있게하면 보안적으로 보다 안전한 웹서비스가 가능해진다.
+
+front에 프록시를 설정하기 위해 .env 파일을 생성하고 다음과 같이 작성한다.
+```
+SOURCE_PATH = '/api/:path*'
+DESTINATION_URL = 'http://localhost:3001/:path*'
+```
 
 
 # 타이틀1(#)

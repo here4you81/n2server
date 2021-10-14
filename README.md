@@ -42,6 +42,13 @@ front라는 이름의 Next.js 프로젝트를 생성한다.
 npx create-next-app front
 ```
 
+front 디렉토리로 이동해서 개발 모드로 서버를 실행한다.
+```bash
+npm run dev
+```
+
+로컬호스트 3000으로 접속해서 웹페이지가 정상 출력되는지 확인한다.
+
 ### back-end 구축
 back이라는 이름의 NestJS 프로젝트를 생성한다.
 

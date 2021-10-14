@@ -35,10 +35,10 @@ sudo npm i create-next-app -g
 ```bash
 sudo npm i -g @nestjs/cli
 ```
- 
-### front-end
 
-### back-end
+### front-end 구축
+
+### back-end 구축
 
 # 타이틀1(#)
 ## 타이틀2(##)

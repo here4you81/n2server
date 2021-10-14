@@ -37,8 +37,10 @@ sudo npm i -g @nestjs/cli
 ```
 
 ### front-end 구축
+front라는 이름의 Next.js 프로젝트를 생성한다.
 
 ### back-end 구축
+back이라는 이름의 NestJS 프로젝트를 생성한다.
 
 # 타이틀1(#)
 ## 타이틀2(##)

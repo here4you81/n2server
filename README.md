@@ -51,6 +51,9 @@ npm run dev
 
 ### back-end 구축
 back이라는 이름의 NestJS 프로젝트를 생성한다.
+```bash
+nest new back
+```
 
 # 타이틀1(#)
 ## 타이틀2(##)

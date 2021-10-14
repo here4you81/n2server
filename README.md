@@ -10,6 +10,23 @@ NestJS + Next.js 테스트
 
 # 환경 구성
 
+## 필수 패키지
+n2server를 구축하기 위해서는 기본적으로 다음과 같은 패키지들이 설치되어야 한다.
+- npm
+```bash
+sudo apt-get install npm
+```
+- node 
+```bash
+sudo npm i -g n
+```
+```bash
+sudo n 14.17.6
+```
+- npx
+```bash
+sudo npm i npx -g
+```
 ## front-end
 
 ## back-end
@@ -20,6 +37,4 @@ NestJS + Next.js 테스트
 - 아이템(-)
 ### 코드 사용법
 ```bash
-```bash
-```
 ```

@@ -125,6 +125,19 @@ gts init으로 프로젝트를 세팅한다.
 npx gts init
 ```
 
+불필요한 파일들이 git으로 관리되는 것을 방지하기 위해 .gitignore파일을 생성하고 다음과 같이 작성한다. gts의 github 소스코드를 그대로 이용한 것이다.
+```
+.DS_Store
+.nyc_output
+.vscode
+build
+coverage
+node_modules
+npm-debug.log
+yarn-error.log
+yarn.lock
+__pycache__
+```
 
 
 

@@ -111,7 +111,19 @@ module.exports = {
 http://localhost:3000/api/apple 로 접속하여 "This action returns all apple" 메시지가 정상 출력되는지 확인한다.
 
 
+### DTO 환경 구축
+front와 back간의 데이터 교환에 사용할 데이터 모델을 TypeScript 기반의 DTO 모델로 선언하여 사용하기 위한 환경을 구축한다. 이를 위해서 gts(Google TypeScript Style) npm 패키지를 이용한다.
 
+프로젝트 root에서 dto 디렉토리를 생성하고 진입한 후 gts를 설치한다.
+gts 설치
+```bash
+npm i gts
+```
+
+gts init으로 프로젝트를 세팅한다.
+```bash
+npx gts init
+```
 
 
 

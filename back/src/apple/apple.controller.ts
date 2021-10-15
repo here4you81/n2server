@@ -2,10 +2,11 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { AppleService } from './apple.service';
 import { CreateAppleDto } from './dto/create-apple.dto';
 import { UpdateAppleDto } from './dto/update-apple.dto';
+import { N2Props } from "../../../dto/build/src/N2Props"
 
 @Controller('apple')
 export class AppleController {
-  constructor(private readonly appleService: AppleService) {}
+  constructor(private readonly appleService: AppleService) { }
 
   @Post()
   create(@Body() createAppleDto: CreateAppleDto) {
@@ -13,8 +14,17 @@ export class AppleController {
   }
 
   @Get()
-  findAll() {
-    return this.appleService.findAll();
+  findAll(): N2Props {
+    console.log("findAll");
+    const props: N2Props = {
+      apiName: "findAll",
+      index: 1,
+      message: "Hello!!!"
+    };
+
+    return props;
+
+    // return this.appleService.findAll();
   }
 
   @Get(':id')

@@ -2,6 +2,7 @@
 .nyc_output
 .vscode
 build
+dist
 coverage
 node_modules
 npm-debug.log

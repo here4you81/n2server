@@ -169,10 +169,19 @@ tsconfig.json 파일의 compilerOptions 항목을 다음과 같이 수정해서 
 ```
 /dto/src 디렉토리에 Animal.ts 파일을 생성하고 다음과 같이 작성한다.
 ```
+// 기본적인 DTO
 export interface Animal {
-  name: string;
-  color: 'REG' | 'GREEN' | 'BLACK';
-  age?: number;
+    name: string;
+    color: 'RED' | 'GREEN' | 'BLACK';
+    age?: number;
+}
+
+// 데이터 Post API에서 사용할 DTO
+export interface CreateAnimalDto extends Animal {
+}
+
+// 데이터 Patch API에서 사용할 DTO
+export interface UpdateAnimalDto extends Partial<CreateAnimalDto> {
 }
 ```
 
@@ -188,12 +197,149 @@ npm run compile
 back에 Animal 모델을 이용하는 리소스를 추가해 보자.
 
 ```bash
-nest g res animas
+nest g res animals
 ```
 
 src/에 animals 디렉토리로 이동해서 불필요한 디렉토리와 파일을 삭제한다.
 - dto, entities 디렉토리: 앞서 작성한 dto를 사용함으로 불필요함
 - *.spec.ts 파일: 테스트에 사용되는 파일들로 현재 불필요함
+
+animals.service.ts 파일을 다음과 같이 수정한다. 기본 생성되어 참조되던 DTO를 걷어내고 dto 프로젝트에서 생성한 Animal 모델을 이용하도록 변경한 것이다.
+```
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Animal, CreateAnimalDto, UpdateAnimalDto } from '../../../dto/dist/Animal';
+
+@Injectable()
+export class AnimalsService {
+
+  // 가상 DB로 사용할 데이터
+  private animalList: Animal[] = [
+    { name: "babe0", color: "RED", age: 0 },
+    { name: "babe1", color: "GREEN", age: 1 },
+    { name: "babe2", color: "BLACK", age: 2 },
+    { name: "babe3", color: "BLACK", age: 3 },
+    { name: "babe4", color: "BLACK", age: 4 },
+    { name: "babe5", color: "BLACK", age: 5 },
+  ];
+
+  create(createAnimalDto: CreateAnimalDto) {
+    this.animalList.push(createAnimalDto);
+    return 'This action adds a new animal';
+  }
+
+  findAll(): Animal[] {
+    return this.animalList;
+  }
+
+  findOne(id: number): Animal {
+    if (id > this.animalList.length)
+      throw new NotFoundException(`Animal with ID ${id} not found.`);
+    return this.animalList[id];
+  }
+
+  update(id: number, updateAnimalDto: UpdateAnimalDto) {
+    const thatOne = this.findOne(id);
+    console.log(Object.assign(thatOne, updateAnimalDto));
+    this.animalList[id] = Object.assign(thatOne, updateAnimalDto);
+  }
+
+  remove(id: number) {
+    const thatOne = this.findOne(id);
+    this.animalList =
+      this.animalList.filter(animal => animal.name != thatOne.name);
+    return `This action removes a #${id} animal`;
+  }
+}
+```
+
+다음으로 animals.controller.ts 파일을 수정한다.
+```
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { AnimalsService } from './animals.service';
+import { Animal, CreateAnimalDto, UpdateAnimalDto } from '../../../dto/dist/Animal';
+
+@Controller('animals')
+export class AnimalsController {
+  constructor(private readonly animalsService: AnimalsService) { }
+
+  @Post()
+  create(@Body() createAnimalDto: CreateAnimalDto) {
+    console.log("create");
+    return this.animalsService.create(createAnimalDto);
+  }
+
+  @Get()
+  findAll(): Animal[] {
+    console.log("findAll");
+    return this.animalsService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string): Animal {
+    console.log("findOne, id=" + id);
+    return this.animalsService.findOne(+id);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateAnimalDto: UpdateAnimalDto) {
+    console.log("update");
+    return this.animalsService.update(+id, updateAnimalDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    console.log("remove");
+    return this.animalsService.remove(+id);
+  }
+}
+```
+
+수정 후 http://localhost:3001/animals/ 로 접속하여 CRUD 기능이 정상 동작하는지 확인한다.
+
+### front-end에서 back-end 호출
+front-end에서 back-end의 API의 호출이 가능하도록 새로운 페이지를 추가해보자.
+front/pages/examples에 animals.tsx 파일을 추가하고 다음과 같이 작성한다.
+```
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { Animal } from "../../../dto/dist/Animal"
+import axios from 'axios';
+
+function Page({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const animals: Animal[] = data;
+
+  return (
+    <div>
+      <h3>Animal Example</h3>
+      {animals.map((animal) => (
+        <div>
+          <p>name: {animal.name}</p>
+          <p>coloe: {animal.color}</p>
+          <p>age: {animal.age}</p>
+          <hr />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const res = await axios.get('http://localhost:3001/animals/');
+  const data: Animal[] = res.data as any as Animal[];
+
+  return {
+    props: { data }
+  }
+}
+
+export default Page
+
+```
+역시 미리 작성했던 dto의 Animal 타입을 사용하도록 import 하였다.
+getServiceSideProps는 페이지가 랜더링 되기 전에 서버(back-end)로부터 데이터를 읽어온 후 그 데이터를 기반으로 페이지를 랜더링하여 클라이언트에게 전달한다.
+back-end와의 통신을 위해서 axios 패키지가 필요하므로 미리 설치해야 한다.
+위 소스에서는 back-end의 컨트롤러와 서비스를 거쳐 animalList값을 배열로 수신한 후 화면에 출력하는 예제이다.
+http://localhost:3000/examples/animals 에 접속하여 정상적으로 animalList의 정보가 출력되는지 확인한다.
+
 
 # 타이틀1(#)
 ## 타이틀2(##)

@@ -2,8 +2,6 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { AnimalsService } from './animals.service';
 import { Animal, CreateAnimalDto, UpdateAnimalDto } from '../../../dto/dist/Animal';
 
-
-
 @Controller('animals')
 export class AnimalsController {
   constructor(private readonly animalsService: AnimalsService) { }

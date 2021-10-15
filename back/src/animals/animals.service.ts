@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Animal, CreateAnimalDto, UpdateAnimalDto } from '../../../dto/dist/Animal';
 
-
-
 @Injectable()
 export class AnimalsService {
+
+  // 가상 DB로 사용할 데이터
   private animalList: Animal[] = [
     { name: "babe0", color: "RED", age: 0 },
     { name: "babe1", color: "GREEN", age: 1 },
@@ -30,7 +30,6 @@ export class AnimalsService {
   }
 
   update(id: number, updateAnimalDto: UpdateAnimalDto) {
-    console.log("id= " + id + ", data= " + JSON.stringify(updateAnimalDto));
     const thatOne = this.findOne(id);
     console.log(Object.assign(thatOne, updateAnimalDto));
     this.animalList[id] = Object.assign(thatOne, updateAnimalDto);

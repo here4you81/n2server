@@ -150,8 +150,29 @@ tsconfig.json 파일의 compilerOptions 항목을 다음과 같이 수정해서 
     "outDir": "./dist",
   },
 ```
+/dto/src 디렉토리에 Animal.ts 파일을 생성하고 다음과 같이 작성한다.
+```
+export interface Animal {
+  name: string;
+  color: 'REG' | 'GREEN' | 'BLACK';
+  age?: number;
+}
+```
+
+그리고 /dto 디렉토리에서 컴파일을 시도한다.
+```bash
+npm run compile
+```
+
+/dto/dist 디렉토리가 생성되면서 빌드 결과물이 추가되었는지를 확인한다.
 
 
+### back-end에 새로운 리소스 등록
+back에 Animal 모델을 이용하는 리소스를 추가해 보자.
+
+```bash
+nest g res animas
+```
 
 # 타이틀1(#)
 ## 타이틀2(##)

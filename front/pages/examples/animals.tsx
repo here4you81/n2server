@@ -1,5 +1,10 @@
 import type { NextPage,GetServerSideProps } from 'next'
 
+type Data = {
+    name: string,
+    aa: number,
+    aaa:number
+  }
 
 const Home: NextPage = () => {
   return (
@@ -8,8 +13,9 @@ const Home: NextPage = () => {
 }
 
 export const getServerSideProps:GetServerSideProps = async () => {
-    const res = await fetch('https://.../data')
-    const data: Data = await res.json()
+    const res = await fetch('https://.../data');
+    const data = await res.json();
+    const aa = 111;
   
     return {
       props: {

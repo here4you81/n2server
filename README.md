@@ -42,8 +42,25 @@ front라는 이름의 Next.js 프로젝트를 생성한다.
 npx create-next-app front --typescript
 ```
 --typescript 옵션을 추가하면 front프로젝트에서 typescript를 사용할 수 있도록 자동 설정된다.  
-  
-  
+
+자바스크립트 문법 체크를 위한 ESLint를 설치한다.  
+```bash
+npx eslint --init
+✔ How would you like to use ESLint? · style
+✔ What type of modules does your project use? · esm
+✔ Which framework does your project use? · react
+✔ Does your project use TypeScript? · No / Yes
+✔ Where does your code run? · browser
+✔ How would you like to define a style for your project? · guide
+✔ Which style guide do you want to follow? · airbnb
+✔ What format do you want your config file to be in? · JavaScript
+Checking peerDependencies of eslint-config-airbnb@latest
+The config that you've selected requires the following dependencies:
+
+eslint-plugin-react@^7.21.5 @typescript-eslint/eslint-plugin@latest eslint-config-airbnb@latest eslint@^5.16.0 || ^6.8.0 || ^7.2.0 eslint-plugin-import@^2.22.1 eslint-plugin-jsx-a11y@^6.4.1 eslint-plugin-react-hooks@^4 || ^3 || ^2.3.0 || ^1.7.0 @typescript-eslint/parser@latest
+✔ Would you like to install them now with npm? · No / Yes
+```
+
 front 디렉토리로 이동해서 개발모드로 서버를 실행한다.
 ```bash
 npm run dev

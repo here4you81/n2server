@@ -139,6 +139,17 @@ yarn.lock
 __pycache__
 ```
 
+### 새로운 데이터 모델 생성
+Animal이라는 데이터 모델을 추가해서 font와 back간에 데이터 교환 모델로 사용하는 방법에 대해서 알아보자.
+
+tsconfig.json 파일의 compilerOptions 항목을 다음과 같이 수정해서 빌드된 결과물이 dist 디렉토리에 생성되도록 한다.
+```
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+  },
+```
+
 
 
 # 타이틀1(#)
